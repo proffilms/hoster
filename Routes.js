@@ -24,12 +24,12 @@ routes.get("/image/:id?", (req, res) => {
         myHostname = req.query.l;
     else
         myHostname = hostname + "/files/D2.jpg";
-    return axios_1.default({
+    axios_1.default({
         url: myHostname,
         method: "GET",
         responseType: "arraybuffer"
     }).then(data => {
-        return jimp_1.default.read(data.data).then((image) => {
+        jimp_1.default.read(data.data).then((image) => {
             let width = jimp_1.default.AUTO, height = jimp_1.default.AUTO, limit = 120;
             const initWidth = image.bitmap.width, initHeight = image.bitmap.height;
             // CHECK ALL QUERIES - l,w,h,
@@ -111,7 +111,7 @@ routes.get("/image/:id?", (req, res) => {
             image.getBase64(jimp_1.default.AUTO, (err, base) => {
                 // console.log("The Base64 is: ",base);
                 if (err)
-                    return res.status(400).json({ error: "Base64 image Processing failed. Sorry, There's seems to be an error" });
+                    res.status(400).json({ error: "Base64 image Processing failed. Sorry, There's seems to be an error" });
                 // res.send(base);
                 const sendJSON = {
                     image: base,
@@ -136,11 +136,10 @@ routes.get("/image/:id?", (req, res) => {
                         'Content-Length': img.length
                     });
                     res.end(img);
-                    return;
                     // res.send(sendJSON.image);
                 }
                 else
-                    return res.json(sendJSON);
+                    res.json(sendJSON);
                 // console.log(JSON.parse(image));
                 /* if(fs.existsSync(thePath)) {
                   // IF IT ENDS WITH A NUMBER
@@ -169,10 +168,10 @@ routes.get("/image/:id?", (req, res) => {
                 `); */
             });
         }).catch((err) => {
-            return res.status(res.statusCode).json({ error: "There seems to be an error with the image! " + err });
+            res.status(res.statusCode).json({ error: "There seems to be an error with the image! " + err });
         });
     }).catch(err => {
-        return res.status(401).send(err);
+        res.status(401).send(err);
     });
 });
 // 404 HANDLER -------------------------------
