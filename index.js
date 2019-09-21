@@ -74,7 +74,7 @@ app.post("/upload", (req, res) => {
 // export const helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
-let port = process.env.port || 8000;
+let port = process.env.PORT || 8000;
 server.listen(port, () => {
     console.log("Listening on Port:", port);
 });
