@@ -12,21 +12,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const functions = __importStar(require("firebase-functions"));
 const express_1 = __importDefault(require("express"));
-// import ioer from './ioer';
+const ioer_1 = __importDefault(require("./ioer"));
 // import path from 'path';
 // import fs from 'fs';
 // import Jimp from "jimp"
 const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
 // const db = admin.firestore();
-// import http from "http";
+const http_1 = __importDefault(require("http"));
 const Routes_1 = __importDefault(require("./Routes"));
 console.log("JSON.stringify(db)");
 console.log("Hello: Peace");
 const cors = require('cors');
 const app = express_1.default();
-// const server = http.createServer(app);
-// ioer(8011);
+const server = http_1.default.createServer(app);
+ioer_1.default(server);
 // 
 // Automatically allow cross-origin requests
 app.use(cors({ origin: true }));
@@ -74,10 +74,10 @@ app.post("/upload", (req, res) => {
 // export const helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
-// let port = 8000;
-// server.listen(port, () => {
-//   console.log("Listening on Port:", port);
-// })
+let port = process.env.port || 8000;
+server.listen(port, () => {
+    console.log("Listening on Port:", port);
+});
 exports.manip = functions.https.onRequest(app);
 // functions.https.
 //# sourceMappingURL=index.js.map
