@@ -1,23 +1,13 @@
 "use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const functions = __importStar(require("firebase-functions"));
 const express_1 = __importDefault(require("express"));
 const ioer_1 = __importDefault(require("./ioer"));
 // import path from 'path';
 // import fs from 'fs';
 // import Jimp from "jimp"
-const admin = require("firebase-admin");
-admin.initializeApp(functions.config().firebase);
 // const db = admin.firestore();
 const http_1 = __importDefault(require("http"));
 const Routes_1 = __importDefault(require("./Routes"));
@@ -74,10 +64,8 @@ app.post("/upload", (req, res) => {
 // export const helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
-let port = process.env.port || 8000;
+let port = process.env.PORT || 8000;
 server.listen(port, () => {
     console.log("Listening on Port:", port);
 });
-exports.manip = functions.https.onRequest(app);
-// functions.https.
 //# sourceMappingURL=index.js.map
